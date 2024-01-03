@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>60 Timer</title>
+
+        <style>
+            #time {
+                color: beige;
+                font-family: monospace;
+                font-size: 40px;
+                position: absolute;
+                left: 50%;
+                top: 80px;
+                margin-left: -100px;
+                width: 200px;
+                height: 50px;
+                text-align: center;
+                line-height: 50px;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius:5px;
+                -o-border-radius:5px;
+                -ms-border-radius:5px;
+            }
+            #stopwatch {
+                position: absolute;
+                left: 50%;
+                margin-left: -100px;
+                border: solid #f5f5dc;
+                border-radius: 2px;
+                -webkit-border-radius: 200px;
+            }
+            #reset {
+                width: 50px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="time">0</div>
+        <canvas id="stopwatch" width=200 height=200></canvas>
+        <button id="reset">
+            <p>Reset</p>
+        </button>
+
+        <script>
+            (function () {
+                var canvas = document.getElementById("stopwatch"),
+                    ctx = canvas.getContext("2d"),
+                    digital = document.getElementById("time"),
+                    reset = document.getElementById("reset"),
+                    timerOn = false,
+                    second = (2 * Math.PI) / 60,
+                    start = 1.5 * Math.PI,
+                    t = 0,
+                    animation;
+
+                var draw = function () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.lineWidth = 30;
+                    ctx.strokeStyle = "#f5f5dc";
+                    ctx.beginPath();
+                    ctx.arc(100, 100, 80, start, start + second * t);
+                    ctx.stroke();
+                    t = t >= 60 ? 0 : t + 0.05;
+                };
+
+
+                canvas.addEventListener("click", function() {
+                    if(!timerOn) {
+                        timerOn = true;
+                        animation = setInterval(function() {
+                            draw();
+                            digital.innerHTML = Math.floor(t);
+                        }, 50);
+                    } else {
+                        timerOn = false;
+                        clearInterval(animation);
+                    }
+                });
+                reset.addEventListener("click", function() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    digital.innerHTML = 0;
+                    timerOn = false;
+                    clearInterval(animation);
+                    t = 0;
+                });
+            })();
+        </script>
+    </body>
+</html>
