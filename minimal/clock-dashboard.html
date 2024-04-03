@@ -68,15 +68,28 @@
 <script>
     function displayGreetings(today) {
         hrs = today.getHours();
-        name=""
-        if (hrs >= 0 && hrs <= 7)
-            greet = 'Bonne nuit'+name;
-        else if (hrs >= 7 && hrs <= 12)
-            greet = 'Bon Matin '+name;
-        else if (hrs >= 12 && hrs <= 17)
-            greet = 'Bon apres-midi'+name;
-        else if (hrs >= 17 && hrs <= 24)
-            greet = 'Bonne soirée'+name;
+        if (hrs >= 23 && hrs <= 7)
+            greet = 'Bonne nuit';
+        else if (hrs >= 7 && hrs <= 8)
+            greet = 'Bon matin';
+        else if (hrs >= 8 && hrs <= 12)
+            greet = 'Formation time';
+        else if (hrs >= 12 && hrs <= 13)
+            greet = 'Petit repas';
+        else if (hrs >= 13 && hrs <= 17)
+            greet = 'Formation time';
+        else if (hrs >= 17 && hrs <= 18)
+            greet = 'Douche & Trucs à faire';
+        else if (hrs >= 18 && hrs <= 19)
+            greet = 'Petite pause';
+        else if (hrs >= 19 && hrs <= 20)
+            greet = 'Travail perso';
+        else if (hrs >= 20 && hrs <= 21)
+            greet = 'Petit dîner';
+        else if (hrs >= 21 && hrs <= 22)
+            greet = 'Travail perso part.2';
+        else if (hrs >= 22 && hrs <= 23)
+            greet = 'Pause & Lecture';
         
         document.getElementById('greet').innerHTML = greet;
     }
